@@ -1,0 +1,9 @@
+
+<%= simple_form_for @meetup do |meetup_form| %>
+  <%= meetup_form.input :title,  placeholder: "Example Title" %>
+  <%= meetup_form.input :description, placeholder: "Meetup Description" %>
+  <%= meetup_form.fields_for :invites do |inv_form| %>
+    <%= inv_form.input :user_id, label: "Invitations to Send [User ID]" %>
+  <% end %>
+  <%= meetup_form.submit "Create Meetup" %>
+<% end %>

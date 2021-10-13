@@ -1,0 +1,10 @@
+<h1>Places New</h1>
+<section>
+  <%= simple_form_for [@meetup, @place] do |form| %>
+    <%= form.input :name,  placeholder: "Example Title" %>
+    <%= form.input :description, placeholder: "Meetup Description" %>
+    <%= form.input :address, placeholder: "Meetup Description" %>
+
+    <%= form.submit "Create Place" %>
+  <% end %>
+</section>

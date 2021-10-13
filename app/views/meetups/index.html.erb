@@ -1,0 +1,11 @@
+
+<% @meetups.each do |meetup| %>
+  <h4>Title: <%= link_to meetup.title, meetup %></h4>
+  <p>Description: <%= meetup.description %></p>
+  <p>Owner: <%= meetup.owner.email %></p>
+<% end %>
+
+
+<div>
+<%= link_to "Meetup Create", new_meetup_path %>
+</div>
