@@ -1,6 +1,6 @@
 class MeetupsController < ApplicationController
-
   before_action :set_meetup, only: [:show, :edit, :update, :destroy]
+  
   def index
     @meetups = policy_scope(Meetup).includes(:owner).order(created_at: :desc)
   end
