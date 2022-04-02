@@ -25,7 +25,7 @@ class MeetupsController < ApplicationController
     binding.pry
 		if @meetup.save
 			flash[:notice] = "You have successfully created a Meetup!"
-			redirect_to @meetup
+			redirect_to @meetup 
 		else
 			render :new
 		end
