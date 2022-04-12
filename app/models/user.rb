@@ -4,11 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :owned_meetups, class_name: "Meetup"
+  has_many :votes, dependent: :destroy
   has_many :invites
   has_many :attending_meetups, through: :invites, source: :meetup
   has_many :friend_invitations
-  has_many :pending_invitations, -> { where confirmed: false }, 
-    class_name: "FriendInvitation", 
+  has_many :pending_invitations, -> { where confirmed: false },
+    class_name: "FriendInvitation",
     foreign_key: "friend_id"
 
   def friends
@@ -18,11 +19,15 @@ class User < ApplicationRecord
     User.where(id: ids)
   end
 
-  def firends_with?(user)
+  def friends_with?(user)
     FriendInvitation.confirmed_record?(id, user.id)
   end
 
   def send_invitation(user)
     invitations.create(friend_id: user.id)
+  end
+
+  def all_meetups
+    attending_meetups + owned_meetups
   end
 end

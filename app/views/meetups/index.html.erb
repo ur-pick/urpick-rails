@@ -2,7 +2,7 @@
 <% @meetups.each do |meetup| %>
   <h4>Title: <%= link_to meetup.title, meetup %></h4>
   <p>Description: <%= meetup.description %></p>
-  <p>Owner: <%= meetup.owner.email %></p>
+  <p>Owner: <%= meetup.owner.email == current_user.email ? "My Event" : meetup.owner.email %></p>
 <% end %>
 
 

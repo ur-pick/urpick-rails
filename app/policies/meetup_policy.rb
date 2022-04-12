@@ -1,7 +1,8 @@
 class MeetupPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      # filter to only include meetups that a user is attending, invited to, or
+      user.all_meetups
     end
   end
 

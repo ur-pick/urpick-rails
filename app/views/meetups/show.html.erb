@@ -1,3 +1,11 @@
 <h1><%= @meetup.title %></h1>
 
-<%#= button_to "Suggest a Place",  %>
+
+<%= link_to "Suggest a Place", new_meetup_place_path(@meetup) %>
+
+<h2>Suggested Places</h2>
+<% @meetup.places.each do |place| %>
+  <h4>Title: <%= place.name %></h4>
+  <p>Address: <%= place.address %></p>  
+  <p>description: <%= place.description %></p>  
+<% end %>
