@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_005457) do
+ActiveRecord::Schema.define(version: 2022_04_13_172150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,17 +44,26 @@ ActiveRecord::Schema.define(version: 2022_04_02_005457) do
     t.index ["user_id"], name: "index_meetups_on_user_id"
   end
 
+  create_table "place_candidates", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "meetup_id", null: false
+    t.bigint "place_id", null: false
+    t.boolean "is_chosen", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["meetup_id"], name: "index_place_candidates_on_meetup_id"
+    t.index ["place_id"], name: "index_place_candidates_on_place_id"
+    t.index ["user_id"], name: "index_place_candidates_on_user_id"
+  end
+
   create_table "places", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.float "longitude"
     t.float "latitude"
     t.string "address"
-    t.boolean "is_chosen"
-    t.bigint "meetup_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["meetup_id"], name: "index_places_on_meetup_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,19 +80,24 @@ ActiveRecord::Schema.define(version: 2022_04_02_005457) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.bigint "place_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["place_id"], name: "index_votes_on_place_id"
-    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.bigint "meetup_id"
+    t.bigint "place_candidate_id", null: false
+    t.bigint "invite_id", null: false
+    t.index ["invite_id"], name: "index_votes_on_invite_id"
+    t.index ["meetup_id"], name: "index_votes_on_meetup_id"
+    t.index ["place_candidate_id"], name: "index_votes_on_place_candidate_id"
   end
 
   add_foreign_key "friend_invitations", "users"
   add_foreign_key "invites", "meetups"
   add_foreign_key "invites", "users"
   add_foreign_key "meetups", "users"
-  add_foreign_key "places", "meetups"
-  add_foreign_key "votes", "places"
-  add_foreign_key "votes", "users"
+  add_foreign_key "place_candidates", "meetups"
+  add_foreign_key "place_candidates", "places"
+  add_foreign_key "place_candidates", "users"
+  add_foreign_key "votes", "invites"
+  add_foreign_key "votes", "meetups"
+  add_foreign_key "votes", "place_candidates"
 end

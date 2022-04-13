@@ -7,5 +7,6 @@
 <% @meetup.places.each do |place| %>
   <h4>Title: <%= place.name %></h4>
   <p>Address: <%= place.address %></p>  
-  <p>description: <%= place.description %></p>  
+  <p>description: <%= place.description %></p>
+  <p> Vote Count: <%= place.votes.count %>  
 <% end %>

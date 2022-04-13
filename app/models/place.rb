@@ -1,4 +1,4 @@
 class Place < ApplicationRecord
   has_many :votes, dependent: :destroy
-  belongs_to :meetup
+  has_many :place_candidates, dependent: :destroy
 end

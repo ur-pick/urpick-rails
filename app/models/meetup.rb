@@ -11,6 +11,7 @@ class Meetup < ApplicationRecord
     mapped_places = {}
     highest_count = -1
     most_voted = []
+    # Could Refactor to SQL
     places.each do |place|
       current_vote_count = place.votes.count
       if current_vote_count > highest_count
@@ -20,6 +21,7 @@ class Meetup < ApplicationRecord
         most_voted.push(place.name)
       end
     end
+
     most_voted
   end
 end
