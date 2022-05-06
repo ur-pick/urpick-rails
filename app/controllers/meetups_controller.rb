@@ -6,6 +6,7 @@ class MeetupsController < ApplicationController
   end
 
   def show
+    @has_voted = Vote.has_voted?(@meetup, current_user)
   end
 
   def new
@@ -32,7 +33,9 @@ class MeetupsController < ApplicationController
   end
 
   def update
+    @meetup.invites.new(user: current_user)
     @meetup.update(meetup_params)
+
     if @meetup.save
       flash[:notice] = "Successfully updated Meetup"
       redirect_to @meetup

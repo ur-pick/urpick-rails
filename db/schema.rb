@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_172150) do
+ActiveRecord::Schema.define(version: 2022_04_15_190355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,10 +84,10 @@ ActiveRecord::Schema.define(version: 2022_04_13_172150) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "meetup_id"
     t.bigint "place_candidate_id", null: false
-    t.bigint "invite_id", null: false
-    t.index ["invite_id"], name: "index_votes_on_invite_id"
+    t.bigint "user_id", null: false
     t.index ["meetup_id"], name: "index_votes_on_meetup_id"
     t.index ["place_candidate_id"], name: "index_votes_on_place_candidate_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
   add_foreign_key "friend_invitations", "users"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_04_13_172150) do
   add_foreign_key "place_candidates", "meetups"
   add_foreign_key "place_candidates", "places"
   add_foreign_key "place_candidates", "users"
-  add_foreign_key "votes", "invites"
   add_foreign_key "votes", "meetups"
   add_foreign_key "votes", "place_candidates"
+  add_foreign_key "votes", "users"
 end

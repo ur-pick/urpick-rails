@@ -1,20 +1,18 @@
 class VotesController < ApplicationController
   def create
-    @vote = Vote.new(votes_params)
-    # check here if user has a vote for this place.
-    authorize @vote
+    @vote = Vote.new()
+
+    @place_candidate = PlaceCandidate.find(params[:place_candidate_id])
+    @vote.place_candidate = @place_candidate
     @vote.user = current_user
-    @place = Place.find(params[:place_id])
-
-    if @vote.save
-      flash[:notice] = "You have Voted for #{place.name}"
+    @vote.meetup = @place_candidate.meetup
+    authorize @vote
+    # check here if user has a vote for this place.
+    if @vote.save!
+      flash[:notice] = "You have Voted for #{@place_candidate.place.name}"
     end
-    redirect_to @place
-  end
-
-  private
-
-  def votes_params
-    params.require(:votes).permit(:place_id)
+    redirect_to @place_candidate.meetup
   end
 end
+
+# Vote.create(meetup: place_c.meetup, user: User.first, place_candidate: PlaceCandidate.first)

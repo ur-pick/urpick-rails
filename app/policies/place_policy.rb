@@ -8,6 +8,7 @@ class PlacePolicy < ApplicationPolicy
   def show?
     found_user?
   end
+
   def create?
     found_user?
   end
@@ -19,5 +20,4 @@ class PlacePolicy < ApplicationPolicy
     # Filter through invites and see if current_user is apart of that invite
     !record.meetup.users.where(id: user.id).empty? || record.meetup.owner.present?
   end
-  
 end

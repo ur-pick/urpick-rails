@@ -12,6 +12,9 @@ class User < ApplicationRecord
     class_name: "FriendInvitation",
     foreign_key: "friend_id"
 
+  validates_uniquess_of :email
+  validates_presence_of :email, :name
+
   def friends
     friends_sent_invitations = FriendInvitation.where(user_id: id, confirmed: true).pluck(:friend_id)
     friends_got_invitations = FriendInvitation.where(friend_id: id, confirmed: true).pluck(:user_id)
