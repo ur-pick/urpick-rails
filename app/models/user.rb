@@ -12,7 +12,7 @@ class User < ApplicationRecord
     class_name: "FriendInvitation",
     foreign_key: "friend_id"
 
-  validates_uniquess_of :email
+  validates_uniqueness_of :email
   validates_presence_of :email, :name
 
   def friends

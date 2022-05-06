@@ -10,7 +10,7 @@ class Meetup < ApplicationRecord
   validates_presence_of :title, :date
   validates_length_of :title, in: 2..60
   validate :date_cannot_be_in_past
-  
+
   def voting_results
     mapped_places = {}
     highest_count = -1
@@ -33,5 +33,6 @@ class Meetup < ApplicationRecord
 
   def date_cannot_be_in_past
     errors.add(:date, "can't be in the past") if
-      !date.blank? and date < Date.today  
+      !date.blank? and date < Date.today
+  end
 end

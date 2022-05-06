@@ -14,5 +14,3 @@ class VotesController < ApplicationController
     redirect_to @place_candidate.meetup
   end
 end
-
-# Vote.create(meetup: place_c.meetup, user: User.first, place_candidate: PlaceCandidate.first)
