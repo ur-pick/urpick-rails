@@ -42,6 +42,7 @@ Meetup.create!({
   title: "Tuesday Night Dinner",
   description: "Friends Gather",
   date: Date.new(2022, 06, 3),
+  city: "Seattle",
   owner: user1,
 })
 
@@ -58,28 +59,3 @@ Invite.create!([
     user: user3,
   },
 ])
-
-Place.create!([
-  {
-    name: "Monsoon",
-    description: "Korean Fusion",
-  },
-  {
-    name: "Kin Dee",
-    description: "Thai Food",
-  },
-])
-place = Place.first
-place2 = Place.second
-
-PlaceCandidate.create!({
-  place: place,
-  meetup: meetup1,
-  user: user2,
-
-})
-PlaceCandidate.create!({
-  place: place2,
-  meetup: meetup1,
-  user: user1,
-})

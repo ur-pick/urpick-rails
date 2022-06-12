@@ -4,3 +4,10 @@
   <h1><%= place.name %></h1>
   <h4><%= place.description %></h4>
 <% end %>
+
+<div style="width: 100%; height: 600px;"
+  data-controller="mapbox"
+  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-mapbox-city-coords-value="<%= @city_coords %>"
+  >
+</div>

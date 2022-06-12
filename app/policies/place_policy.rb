@@ -6,6 +6,7 @@ class PlacePolicy < ApplicationPolicy
   end
 
   def show?
+    binding.pry
     found_user?
   end
 

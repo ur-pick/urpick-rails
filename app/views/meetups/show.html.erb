@@ -1,7 +1,7 @@
 <h1><%= @meetup.title %></h1>
 
 
-<%= link_to "Pick a Place", meetup_places_path(@meetup) %>
+<%= link_to "Pick a Place",  meetup_places_path(@meetup) %>
 
 <h2>Suggested Places</h2>
 <% @meetup.place_candidates.each do |place_candidate| %>
@@ -9,7 +9,7 @@
   <p>Address: <%= place_candidate.place.address %></p>  
   <p>description: <%= place_candidate.place.description %></p>
   <p> Vote Count: <%= place_candidate.votes.count %>
-  <% unless @has_voted %>
+  <% unless place_candidate.vo %>
     <%= button_to "Vote For #{place_candidate.place.name}", place_candidate_votes_path(place_candidate) %>
   <% else %>
     <p style="color: gray">Already Voted</p>

@@ -3,9 +3,11 @@ class Meetup < ApplicationRecord
   has_many :users, through: :invites
   has_many :place_candidates
   belongs_to :owner, class_name: "User", foreign_key: :user_id
-
   accepts_nested_attributes_for :invites, allow_destroy: true,
                                           :reject_if => proc { |att| att[:user_id].blank? }
+
+  geocoded_by :city
+  after_validation :geocode, if: :will_save_change_to_city?
 
   validates_presence_of :title, :date
   validates_length_of :title, in: 2..60
